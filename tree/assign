@@ -1,0 +1,108 @@
+SELECT [DISTINCT|ALL] 	columnName|expression,
+[,columnName|expression].............
+
+FROM TABLENAMES]
+
+[WHERE CONDITIONS
+GROUP BYBEXPRESSION|COLUMNNAME
+[,EXPRESSION |COLUMNNAME]...........
+
+HAVING having conditions
+ORDER BY EXPRESSION|COLUMNENAME|COLUMN ORDER
+
+LIMIT No of records OFFSET 	offsetNo.]
+
+syntax errors-----------
+syntax
+semantic
+gather statistics
+generate diff. execution plan
+choose best plan
+execute
+results
+save sql,best plan
+
+hard parsing
+soft parsing
+LRU
+
+selection - collection of selection and projection
+projection
+
+select distinct rollno,city from student;(distinct for combination of both col)
+select 1000*3 from student;
+
+DUAL -- dummy table consist of 1 row 1 col
+col is NULL
+col is not NULL
+
+select sno from student orderby sno [ASC/DESC]
+NULL will be listed first in ASC
+NULL will be listed last in DESC
+pagination
+
+orderby non-unique col,unique key
+order by 2 (position...col)
+order by 4-2 (wont take position...wont order)
+
+order by s2 limit 2(it will apply on top  2 rows);  
+ex = 20 A
+     40 B
+     60 C
+op = 20 A
+     40 B
+
+limit 2 offset 1 (offset is use for eliminating record from top);
+op = 40 B
+     60 C
+
+limit 1,10(will give 10 rows from 1)
+
+
+
+add col total
+pass mark =50
+1)class avg
+2)subject avg 
+3)3 people in sub who score 100...display all the people who fail in that subject.
+
+
+alter table student add sub3 integer default 50;
+alter table student add sub4 integer default 50;
+alter table student add sub5 integer default 50;
+desc student;
+select * from student;
+update student set sub1 = 50;
+update student set sub2 = 50;
+commit;
+rollback;
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(12,'shweta','F',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(13,'shital','F',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(14,'sumit','M',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(15,'suraj','M',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(16,'mohit','M',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(17,'tanbir','F',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(18,'harjas','M',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(19,'sandesh','M',50,50,50,50,50);
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)values(20,'shabrin','F',50,50,50,50,50);
+commit;
+update student set sub1 = sub1 - 2 , sub2 = sub2 + 4,sub3 = sub3 + 11  where rollNo%2 = 0;
+select * from student where rollNo%2 = 0;
+
+update student set sub5 = sub5 + 20 ,sub4 = sub4 * 3 - 90 where sname like 'a%'; 
+select * from student where sname like 'a%';
+
+update student set sub1 = sub1 + 5 , sub2 = sub2 + 7,sub3 = sub3 -4,sub4= sub4 + 21,sub5 = (sub5+230) / 3  where rollNo%3 = 0 or rollNo%5 = 0;
+select * from student where  rollNo%3 = 0 or rollNo%5 = 0;
+rollback;
+
+select rollNo,sname from student  where sub1 > 60 order by rollNo desc;
+select rollNo,sname from student  where sub2 between 60 and 70  order by rollNo desc;
+select rollNo,sname from student  where sub1 >=100 or sub2 >=100 or sub3>=100 or sub4>=100 or sub5>=100 order by rollNo desc;
+
+update student set sub1 = 100,sub2 = 100, sub3 =100,sub4 =100,sub5 =100 where sub1 > 100 or sub2 > 100 or sub3 > 100 or sub4 > 100 or sub5 > 100;
+
+select sub1, count(sub1) from student group by sub1;
+
+select * from student;
+insert into student (rollNo,sname,gender,sub1,sub2,sub3,sub4,sub5)  values (21,'uday','M',NULL,NULL,NULL,NULL,NULL);
