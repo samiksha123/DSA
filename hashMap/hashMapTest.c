@@ -1,6 +1,7 @@
 #include "testUtils.h"
 #include "hashMap.h"
 #include <stdio.h>
+#include <string.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 typedef struct {
@@ -21,14 +22,29 @@ int hashcode(void* key,int capacity){
 void test_for_putting_data(){
 	int key =10;
 	int key2 = 20;
-	Data* data,*data1;
 	String value ="Samiksha";
 	String value2 = "manali";
 	HashMap *hm = createHashMap(hashcode,compareKeys);
 	ASSERT(put(hm,&key,&value));
 	ASSERT(put(hm,&key2,&value2));
+	ASSERT(&value == get(hm,&key));
+	ASSERT(&value2 == get(hm,&key2));
+}
+void test_for_insert_data_into_bucket(){
+	int key = 10,key2 = 20;
+	int value = 100,value2 = 200;
+	HashMap *hm = createHashMap(hashcode, compareKeys);
+	ASSERT(put(hm,&key,&value));
 	ASSERT(put(hm,&key2,&value2));
-	data = getData(&key,&value);
-	ASSERT(&key == data->key);
-	ASSERT(&value == data->value);
+	ASSERT(get(hm, &key) == &value);
+	ASSERT(get(hm, &key2) == &value2);
+}
+void test_for_putting_data_into_bucket(){
+	int key = 10,key2 = 20;
+	int value = 100,value2 = 200;
+	HashMap *hm = createHashMap(hashcode, compareKeys);
+	ASSERT(put(hm,&key,&value));
+	ASSERT(put(hm,&key2,&value2));
+	ASSERT(get(hm, &key) == &value);
+	ASSERT(get(hm, &key2) == &value2);
 }

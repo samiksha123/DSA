@@ -7,5 +7,4 @@ typedef struct iterator{
 	void* (*next)(struct iterator it);	
 	int (*hasNext)(struct iterator it);
 } Iterator;
-
 #endif

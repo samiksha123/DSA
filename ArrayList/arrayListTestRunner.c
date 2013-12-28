@@ -104,6 +104,11 @@ int main(){
 		test_should_remove_element_from_the_list();
 	tearDown();
 	testEnded();
+	testStarted("test_should_not_remove_element_from_the_list");
+	setup();
+		test_should_not_remove_element_from_the_list();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

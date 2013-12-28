@@ -54,6 +54,16 @@ int main(){
 		test_for_putting_data();
 	tearDown();
 	testEnded();
+	testStarted("test_for_insert_data_into_bucket");
+	setup();
+		test_for_insert_data_into_bucket();
+	tearDown();
+	testEnded();
+	testStarted("test_for_putting_data_into_bucket");
+	setup();
+		test_for_putting_data_into_bucket();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

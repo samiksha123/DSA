@@ -118,3 +118,13 @@ void test_should_remove_element_from_the_list(){
     res = removee(internsPtr,1);
 	ASSERT(&kavita == res);
 }
+void test_should_not_remove_element_from_the_list(){
+	void* res;
+	Intern kavita = {111,"kavita",18};
+	Intern prajakta = {110,"prajakta",19};
+	insert(internsPtr, 0, &prateek);
+	insert(internsPtr,1,&kavita);
+	insert(internsPtr,2,&prajakta);
+    res = removee(internsPtr,3);
+	ASSERT(NULL == res);
+}

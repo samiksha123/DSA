@@ -80,14 +80,14 @@ int search(ArrayList *list, void *data){
 	return 0;
 }
 
-int hasNext(Iterator *it){
+int hasSibbling(Iterator *it){
 	ArrayList *list = it->list;
 	if(list->length <= it->position) return 0;
 	return 1;
 }
 void* next(Iterator *it){
 	ArrayList *list = it->list;
-	if(!hasNext(it)) return NULL;
+	if(!hasSibbling(it)) return NULL;
 	return list->base[it->position++];
 }
 
@@ -95,7 +95,7 @@ Iterator getIterator(ArrayList  *list){
 	Iterator it;
 	it.list  = list;
 	it.position = 0;
-	it.hasNext = &hasNext;
+	it.hasSibbling = &hasSibbling;
 	it.next = &next;
 	return it;
 }

@@ -18,27 +18,35 @@ int put(HashMap* hm,void* key,void* value){
 	Data* data = getData(key, value);
 	int hash = hashc(key,10);
 	List* list = (List*)(hm->buckets+sizeof(List)*hash);
-	printf("---before----%d\n",list->length);
 	insert(list, list->length, data);
-	printf("---after----%d\n",list->length);
 	return 1;
 }
-void* removeData(HashMap* hm,void* key){
-	if(!hm->buckets) return NULL;
-	return NULL;
+int findIndex(HashMap* hm ,void* key ,List* list){
+    Data* data;
+    int index = 0,i;
+    Node* node = list->head;
+    for(i = 0;i < list->length;i++){
+        data = node->data;
+        if (!hm->compare(key ,data->key)) return index;
+        node = node->next;
+        index++;
+    };
+    return index;
 }
+
 void* get(HashMap *hm, void *key){
         Node* node;
         Data* data;
+        int i;
         int hash = hashc(key,10);
         List* list = (List*)(hm->buckets+(sizeof(List)*hash));
-        if(!list->length) return NULL;
+        if(list->length == 0) return NULL;
         node = list->head;
-        do{
+        for(i = 0;i < list->length;i++){
                 data = node->data;
-                if (!hm->compare(key ,data->key)) return data;
+                if (hm->compare(key,data->key) == 0) return data->value;
                 node = node->next;
-        }while(node->next != NULL);
+        };
         return NULL;
 }
 Data* getData(void* key,void* value){

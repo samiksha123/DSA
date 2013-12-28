@@ -54,9 +54,9 @@ int main(){
 		test_sort_integer_data();
 	tearDown();
 	testEnded();
-	testStarted("test_sort_integer_data1");
+	testStarted("test_sort_only_one_integer_element");
 	setup();
-		test_sort_integer_data1();
+		test_sort_only_one_integer_element();
 	tearDown();
 	testEnded();
 	testStarted("test_sort_float_data");

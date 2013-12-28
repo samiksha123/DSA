@@ -1,11 +1,15 @@
 #include "testUtils.h"
 #include "tree.h"
 #include <stdlib.h>
+#include <String.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 int compareInts(void *a,void *b){
         return *(int*)a - *(int*)b;
+}
+int compareChars(void *a,void *b){
+        return *(char*)a - *(char*)b;
 }
 
 void test_insert_Data_At_Root_Node(){
@@ -66,7 +70,6 @@ void test_insert_Data_At_child_Node(){
         child = (TreeNode*)getchildren(tree,&data[2]);
                 ASSERT(&data[5] == child->data );
 }
-
 void test_search_root_node_in_tree(){
         int data[] ={10,5,3};
         Tree *tree = createTree(compareInts);
@@ -83,7 +86,6 @@ void test_search_child_node_in_tree(){
         ASSERT(insertNode(tree, &data[2],&data[0]));
         ASSERT(search(tree, &data[2]));
 }
-
 void test_remove_root_node_in_tree(){
         int data = 10;
         Tree *tree = createTree(compareInts);
@@ -91,7 +93,6 @@ void test_remove_root_node_in_tree(){
         ASSERT(insertNode(tree, &data, NULL));
         ASSERT(removeNode(tree, &data));
 }
-
 void test_remove_child_node_in_tree(){
         int data[] ={10,5,3};
         Tree *tree = createTree(compareInts);
@@ -116,4 +117,31 @@ void test_should_not_remove_node_that_not_exist(){
         ASSERT(insertNode(tree, &data[0], NULL));
         ASSERT(insertNode(tree, &data[1],&data[0]));
         ASSERT(!removeNode(tree, &data[2]));
+}
+void test_for_removing_character(){
+	char data[] = {'a','b','c'};
+	Tree* tree = createTree(compareChars);
+	TreeNode *child;
+	ASSERT(insertNode(tree,&data[0],NULL));
+	ASSERT(insertNode(tree, &data[1], &data[0]));
+	ASSERT(removeNode(tree, &data[1]));
+}
+void test_should_not_remove_root_node(){
+	char data[] = {'a','b','c'};
+	Tree* tree = createTree(compareChars);
+	TreeNode *child;
+	ASSERT(insertNode(tree,&data[0],NULL));
+	ASSERT(insertNode(tree, &data[1], &data[0]));
+	ASSERT(!removeNode(tree, &data[0]));
+}
+
+void test_should_remove_string(){
+	String data[3];
+	Tree* tree = createTree(compareChars);
+	TreeNode *child;
+	strcpy(data[0],"CEO");
+	strcpy(data[1],"precident");
+	ASSERT(insertNode(tree,&data[0],NULL));
+	ASSERT(insertNode(tree, &data[1], &data[0]));
+	ASSERT(removeNode(tree, &data[1]));
 }
