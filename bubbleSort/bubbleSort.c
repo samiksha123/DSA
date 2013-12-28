@@ -14,11 +14,10 @@ void bubbleSort(void* base,int noOfElements,int elementSize,compare comp){
 	         if(comparisonResult >= 0)
                {
              	memcpy(temp, elementToCompare, elementSize);
-               	memcpy(elementToCompare, 
-                       nextElement, elementSize);
+               	memcpy(elementToCompare,nextElement, elementSize);
               	memcpy(nextElement,temp, elementSize);
           	}
         free(temp);
-	}
+		}
 	}
 }

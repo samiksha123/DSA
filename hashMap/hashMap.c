@@ -19,25 +19,34 @@ int put(HashMap* hm,void* key,void* value){
 	int hash = hashc(key,10);
 	List* list = (List*)(hm->buckets+sizeof(List)*hash);
 	printf("---before----%d\n",list->length);
-	insert(list, list->length, value);
+	insert(list, list->length, data);
 	printf("---after----%d\n",list->length);
 	return 1;
 }
 void* removeData(HashMap* hm,void* key){
 	if(!hm->buckets) return NULL;
-	
 	return NULL;
 }
-void* get(HashMap* hm,void* key){
-
-	return NULL;
+void* get(HashMap *hm, void *key){
+        Node* node;
+        Data* data;
+        int hash = hashc(key,10);
+        List* list = (List*)(hm->buckets+(sizeof(List)*hash));
+        if(!list->length) return NULL;
+        node = list->head;
+        do{
+                data = node->data;
+                if (!hm->compare(key ,data->key)) return data;
+                node = node->next;
+        }while(node->next != NULL);
+        return NULL;
 }
 Data* getData(void* key,void* value){
 	Data* data = calloc(1, sizeof(Data));
 	data->key = key;
 	data->value = value;
 	return data;
-}																	
+}		
 void dispose(HashMap* hm){
 	free(hm->buckets);
 	free(hm);

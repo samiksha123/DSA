@@ -27,7 +27,6 @@ void test_sort_only_one_integer_element(){
 	bubbleSort(data, 1, sizeof(int), compareInt);
 	ASSERT(0 == memcmp(data,expected,sizeof(expected)));
 }
-
 void test_sort_float_data(){
 	float data[5] = {5.2f,2.1f,8.4f,7.7f,8.2f};
 	float expected[5] = {2.1f,5.2f,7.7f,8.2f,8.4f};

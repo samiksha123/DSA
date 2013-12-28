@@ -20,4 +20,6 @@ void* get(HashMap* hm,void* key);
 void* removeData(HashMap* hm,void* key);
 void dispose(HashMap* hm);
 Data* getData(void* key,void* data);
+int searchData(HashMap* map , void* key);
+
 
