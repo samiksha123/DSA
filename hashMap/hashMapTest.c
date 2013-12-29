@@ -48,3 +48,15 @@ void test_for_putting_data_into_bucket(){
 	ASSERT(get(hm, &key) == &value);
 	ASSERT(get(hm, &key2) == &value2);
 }
+void test_remove_an_element_to_hashmap(){
+        Data* data;
+        int key = 1,key2 = 2;
+        String value="samiksha" , value2 ="manali";
+        HashMap* hm = createHashMap(hashcode, compareKeys);
+        ASSERT(put(hm, &key , &value));
+        ASSERT(put(hm, &key2 , &value2));
+        ASSERT(removeData(hm, &key));
+        ASSERT(get(hm, &key) == NULL);
+        ASSERT(get(hm, &key2) == &value2);
+        
+}

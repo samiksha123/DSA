@@ -64,6 +64,11 @@ int main(){
 		test_for_putting_data_into_bucket();
 	tearDown();
 	testEnded();
+	testStarted("test_remove_an_element_to_hashmap");
+	setup();
+		test_remove_an_element_to_hashmap();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
