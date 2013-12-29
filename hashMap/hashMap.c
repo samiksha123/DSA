@@ -33,7 +33,6 @@ int findIndex(HashMap* hm ,void* key ,List* list){
     };
     return index;
 }
-
 void* get(HashMap *hm, void *key){
         Node* node;
         Data* data;
