@@ -134,12 +134,12 @@ void test_should_not_remove_root_node(){
 	ASSERT(!removeNode(tree, &data[0]));
 }
 void test_should_remove_string(){
-	String data[3];
-	Tree* tree = createTree(compareChars);
-	TreeNode *child;
-	strcpy(data[0],"CEO");
-	strcpy(data[1],"precident");
-	ASSERT(insertNode(tree,&data[0],NULL));
-	ASSERT(insertNode(tree, &data[1], &data[0]));
-	ASSERT(removeNode(tree, &data[1]));
+        String data[3];
+        Tree* tree = createTree(compareChars);
+        TreeNode *child;
+        strcpy(data[0],"CEO");
+        strcpy(data[1],"precident");
+        ASSERT(insertNode(tree,&data[0],NULL));
+        ASSERT(insertNode(tree, &data[1], &data[0]));
+        ASSERT(removeNode(tree, &data[1]));
 }

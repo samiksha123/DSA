@@ -64,7 +64,6 @@ int removeData(HashMap *hm, void *key){
     deleteNode(list,index);
     return 1;
 }
-
 Iterator keys(HashMap* hm){
     Iterator it;
     int i;
@@ -72,14 +71,11 @@ Iterator keys(HashMap* hm){
     List* list;
     for(i = 0;i < 10;i++){
         list = (hm->buckets+(sizeof(void*)*i));
-        printf("%p\n",list);
         it = getIterator(list);
-            while(it.hasNext(&it)==1){
-                data = it.next(&it);
-                printf("%d\n",*(int*)data);
-               insert(list, list->length, data);
-               break;
-            };
+        while(it.hasNext(&it)==1){
+            data = it.next(&it);
+            insert(list, list->length, data);
+        };
     }
    it = getIterator(list);
     return it;
