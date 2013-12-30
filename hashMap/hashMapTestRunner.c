@@ -49,24 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_for_putting_data");
+	testStarted("test_remove_an_element_from_hashmap");
 	setup();
-		test_for_putting_data();
+		test_remove_an_element_from_hashmap();
 	tearDown();
 	testEnded();
-	testStarted("test_for_insert_data_into_bucket");
+	testStarted("test_should_not_remove_an_element_from_hashmap");
 	setup();
-		test_for_insert_data_into_bucket();
-	tearDown();
-	testEnded();
-	testStarted("test_for_putting_data_into_bucket");
-	setup();
-		test_for_putting_data_into_bucket();
-	tearDown();
-	testEnded();
-	testStarted("test_remove_an_element_to_hashmap");
-	setup();
-		test_remove_an_element_to_hashmap();
+		test_should_not_remove_an_element_from_hashmap();
 	tearDown();
 	testEnded();
 

@@ -1,5 +1,5 @@
 #include <stdbool.h>
-//#include "iterator.h"
+#include "iterator.h"
 typedef struct node{
 	struct node* previous;
 	void* data;
@@ -16,3 +16,7 @@ List* create();
 Node* createNode(void* previous,void* next);
 int insert(List* list,int index,void * element);
 void* deleteNode(List* list, int index);
+
+Iterator getIterator(List *list);
+void* next(Iterator *it);
+int hasNext(Iterator* it);
