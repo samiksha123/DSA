@@ -74,6 +74,11 @@ int main(){
 		test_should_give_iterator_of_keys();
 	tearDown();
 	testEnded();
+	testStarted("test_should_give_iterator_of_keys2");
+	setup();
+		test_should_give_iterator_of_keys2();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

@@ -14,7 +14,7 @@ int merge(void** base, void** left, void** right, int leftLength, int rightLengt
         }
         k++;
     }
-    while( j < rightLength){
+    while(j < rightLength){
         base[k] = right[j];
         j++;
         k++;
@@ -26,17 +26,17 @@ int merge(void** base, void** left, void** right, int leftLength, int rightLengt
     }
     return 1;
 }
-void mergeSort(void** base, int numberOfElements, comparator comp){
-    int mid = numberOfElements/2,i,leftLength,rightLength;
+void mergeSort(void** base, int size, comparator comp){
+    int mid = size/2,i,leftLength,rightLength;
     void** left = calloc(mid,sizeof(void*));
     void** right = calloc(mid+1,sizeof(void*));
-    if(numberOfElements < 2) return;
+    if(size < 2) return;
     leftLength = mid;
-    rightLength = numberOfElements-mid;
+    rightLength = size - mid;
     for(i = 0;i < mid;i++)
         left[i] = base[i];
-    for(i = mid;i < numberOfElements;i++)
-        right[i-mid] = base[i];
+    for(i = mid;i < size;i++)
+        right[i - mid] = base[i];
     mergeSort(left,leftLength,comp);
     mergeSort(right,rightLength,comp);
     merge(base, left, right, leftLength, rightLength, comp);

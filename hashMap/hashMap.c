@@ -2,28 +2,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int capacity = 10;
 HashMap* createHashMap(HashCodeGenerator hashCode,Compare compare){
-    HashMap* hm = (HashMap*)calloc(1,sizeof(HashMap));
+    HashMap* hm = calloc(1,sizeof(HashMap));
+    int i;
     hm->hashCode = hashCode;
     hm->compare = compare;
-    hm->buckets =  calloc(10,sizeof(void*));
+    hm->buckets  =  calloc(capacity,sizeof(List));
+    for ( i = 0; i < capacity; i++)
+        hm->buckets[i] = create();
     return hm;
 }
-int hashc(void* key,int capacity){
+int hashc(void* key){
     int hash;
     hash = *(int*)key % capacity;
     return hash;
 }
 int put(HashMap* hm,void* key,void* value){
-    Data* data = getData(key, value);
-    int hash = hashc(key,10);
-    List* list = (List*)(hm->buckets+sizeof(void*)*hash);
-    printf("%p\n",list);
+    HashElement* data = getHashElement(key, value);
+    int hash = hashc(key);
+    List* list = (List*)hm->buckets[hash];
     insert(list, list->length, data);
     return 1;
 }
 int findIndex(HashMap* hm ,void* key ,List* list){
-    Data* data;
+    HashElement* data;
     int index = 0,i;
     Node* node = list->head;
     for(i = 0;i < list->length;i++){
@@ -36,10 +39,10 @@ int findIndex(HashMap* hm ,void* key ,List* list){
 }
 void* get(HashMap *hm, void *key){
     Node* node;
-    Data* data;
+    HashElement* data;
     int i;
-    int hash = hashc(key,10);
-    List* list = (List*)(hm->buckets+(sizeof(void*)*hash));
+    int hash = hashc(key);
+    List* list = (List*)hm->buckets[hash];
     if(list->length == 0) return NULL;
     node = list->head;
     for(i = 0;i < list->length;i++){
@@ -49,16 +52,16 @@ void* get(HashMap *hm, void *key){
     };
     return NULL;
 }
-Data* getData(void* key,void* value){
-    Data* data = calloc(1, sizeof(Data));
+HashElement* getHashElement(void* key,void* value){
+    HashElement* data = calloc(capacity, sizeof(HashElement));
     data->key = key;
     data->value = value;
     return data;
 }       
 int removeData(HashMap *hm, void *key){
     void* value = get(hm, key);
-    int index ,hash = hashc(key, 10);
-    List* list = (List*)(hm->buckets+(sizeof(void*)*hash));
+    int index ,hash = hashc(key);
+    List* list = (List*)hm->buckets[hash];
     if(!hm) return 0;
     index = findIndex( hm ,key ,list);
     deleteNode(list,index);
@@ -67,19 +70,20 @@ int removeData(HashMap *hm, void *key){
 Iterator keys(HashMap* hm){
     Iterator it;
     int i;
-    void* data;
-    List* list;
-    for(i = 0;i < 10;i++){
-        list = (hm->buckets+(sizeof(void*)*i));
+    HashElement* data;
+    List* list = create();
+    for(i = 0;i < capacity;i++){
+        list = hm->buckets[i];
         it = getIterator(list);
-        while(it.hasNext(&it)==1){
-            data = it.next(&it);
-            insert(list, list->length, data);
+        while(it.hasNext(&it)){
+            data = (HashElement*)it.next(&it);
+            insert(list, list->length, data->key);
+            break;
         };
     }
-   it = getIterator(list);
+    it = getIterator(list);
     return it;
-}         
+}
 void dispose(HashMap* hm){
     free(hm->buckets);
     free(hm);
