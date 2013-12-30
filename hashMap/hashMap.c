@@ -6,7 +6,7 @@ HashMap* createHashMap(HashCodeGenerator hashCode,Compare compare){
     HashMap* hm = (HashMap*)calloc(1,sizeof(HashMap));
     hm->hashCode = hashCode;
     hm->compare = compare;
-    hm->buckets =  calloc(10,sizeof(List));
+    hm->buckets =  calloc(10,sizeof(void*));
     return hm;
 }
 int hashc(void* key,int capacity){
@@ -17,7 +17,8 @@ int hashc(void* key,int capacity){
 int put(HashMap* hm,void* key,void* value){
     Data* data = getData(key, value);
     int hash = hashc(key,10);
-    List* list = (List*)(hm->buckets+sizeof(List)*hash);
+    List* list = (List*)(hm->buckets+sizeof(void*)*hash);
+    printf("%p\n",list);
     insert(list, list->length, data);
     return 1;
 }
@@ -38,7 +39,7 @@ void* get(HashMap *hm, void *key){
     Data* data;
     int i;
     int hash = hashc(key,10);
-    List* list = (List*)(hm->buckets+(sizeof(List)*hash));
+    List* list = (List*)(hm->buckets+(sizeof(void*)*hash));
     if(list->length == 0) return NULL;
     node = list->head;
     for(i = 0;i < list->length;i++){
@@ -57,7 +58,7 @@ Data* getData(void* key,void* value){
 int removeData(HashMap *hm, void *key){
     void* value = get(hm, key);
     int index ,hash = hashc(key, 10);
-    List* list = (List*)(hm->buckets+(sizeof(List)*hash));
+    List* list = (List*)(hm->buckets+(sizeof(void*)*hash));
     if(!hm) return 0;
     index = findIndex( hm ,key ,list);
     deleteNode(list,index);
@@ -70,17 +71,17 @@ Iterator keys(HashMap* hm){
     void* data;
     List* list;
     for(i = 0;i < 10;i++){
-        list = (List*)(hm->buckets+(sizeof(List)*i));
+        list = (hm->buckets+(sizeof(void*)*i));
+        printf("%p\n",list);
         it = getIterator(list);
-            while(it.hasNext(&it)){
-            printf("................");
-            data = it.next(&it);
-            insert(list, list->length, data);
-            break;
-            }
+            while(it.hasNext(&it)==1){
+                data = it.next(&it);
+                printf("%d\n",*(int*)data);
+               insert(list, list->length, data);
+               break;
+            };
     }
-    it = getIterator(list);
-    it.next = &next;
+   it = getIterator(list);
     return it;
 }         
 void dispose(HashMap* hm){

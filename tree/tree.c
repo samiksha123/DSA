@@ -30,8 +30,8 @@ void* traverseInside(Tree* tree , TreeNode* tn){
     if(hasChild(tn)) return tn->children;
     if(hasSibbling(tn)) return tn->sibbling;
     do{
-            tn = tn->parent;
-            if(hasSibbling(tn))  return tn->sibbling;
+        tn = tn->parent;
+        if(hasSibbling(tn))  return tn->sibbling;
     }while(!tn->sibbling && tn->parent != tree->root);
     return NULL;
 }
@@ -39,9 +39,9 @@ void* traverse(Tree* tree,void* parentData ){
     TreeNode* tn = tree->root;
     if(0 == tree->Compare(tn->data , parentData)) return tn;
     do{
-            tn = traverseInside(tree , tn);
-            if(NULL == tn) return NULL;
-            if(0 == tree->Compare(tn->data , parentData)) return tn;
+        tn = traverseInside(tree , tn);
+        if(NULL == tn) return NULL;
+        if(0 == tree->Compare(tn->data , parentData)) return tn;
     }while(tn != tree->root);
     return tn;
 }
@@ -49,24 +49,24 @@ int insertNode(Tree* tree,void* data,void* parentData){
     TreeNode* tn = createNode(data);
     TreeNode* parentNode ,*child;
     if(tree->root == NULL ){
-            if(parentData != NULL) return 0;
-            tree->root = tn;
-            tn->parent = tree->root;
-            return 1;
+        if(parentData != NULL) return 0;
+        tree->root = tn;
+        tn->parent = tree->root;
+        return 1;
     }
     if(parentData == NULL) return 0;
     parentNode = traverse(tree,parentData);
     if(parentNode == NULL) return 0;
     if(parentNode->children == NULL) {
-            tn->parent = parentNode;
-            parentNode->children = tn;
+        tn->parent = parentNode;
+        parentNode->children = tn;
     }
     else{
-            child = parentNode->children;
-            while(child->sibbling != NULL)
-                    child = child->sibbling;
-            tn->parent = child->parent;
-            child->sibbling = tn;
+        child = parentNode->children;
+        while(child->sibbling != NULL)
+                child = child->sibbling;
+        tn->parent = child->parent;
+        child->sibbling = tn;
     }
     return 1;
 }
@@ -88,9 +88,9 @@ int removeNode(Tree* tree,void* data){
     tn = traverse(tree, data);
     if(NULL == tn) return 0;
     if(!tn->children){
-            parent = tn->parent;
-            parent->children = tn->sibbling;
-            return 1;
+        parent = tn->parent;
+        parent->children = tn->sibbling;
+        return 1;
     }        
     return 0;
 }
