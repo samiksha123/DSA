@@ -11,7 +11,6 @@ int compareInts(void *a,void *b){
 int compareChars(void *a,void *b){
         return *(char*)a - *(char*)b;
 }
-
 void test_insert_Data_At_Root_Node(){
         int data = 10 ;
         Tree *tree = createTree(compareInts);
@@ -134,7 +133,6 @@ void test_should_not_remove_root_node(){
 	ASSERT(insertNode(tree, &data[1], &data[0]));
 	ASSERT(!removeNode(tree, &data[0]));
 }
-
 void test_should_remove_string(){
 	String data[3];
 	Tree* tree = createTree(compareChars);
