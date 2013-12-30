@@ -16,6 +16,7 @@ int compareDouble(void* first,void* second){
 int compareChar(void* first,void* second){
 	return *(char*)first < *(char*)second;
 }
+
 void test_for_sorting_an_integer_elements(){
     int actual[] = {4,3,1,2};
     int expected[] = {1,2,3,4};
@@ -54,3 +55,4 @@ void test_for_sorting_characters(){
     for(i=0;i<4;i++)
             ASSERT(expected[i] == *(char*)base[i]);
 }
+

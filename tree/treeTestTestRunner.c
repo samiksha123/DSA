@@ -49,31 +49,6 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_for_sorting_an_integer_elements");
-	setup();
-		test_for_sorting_an_integer_elements();
-	tearDown();
-	testEnded();
-	testStarted("test_for_sorting_an_float_elements");
-	setup();
-		test_for_sorting_an_float_elements();
-	tearDown();
-	testEnded();
-	testStarted("test_for_sorting_an_double_elements");
-	setup();
-		test_for_sorting_an_double_elements();
-	tearDown();
-	testEnded();
-	testStarted("test_for_sorting_characters");
-	setup();
-		test_for_sorting_characters();
-	tearDown();
-	testEnded();
-	testStarted("test_for_sorting_string_element");
-	setup();
-		test_for_sorting_string_element();
-	tearDown();
-	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
