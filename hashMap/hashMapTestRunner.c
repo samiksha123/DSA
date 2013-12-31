@@ -49,34 +49,9 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_for_putting_data");
+	testStarted("test_rehash_keys_in_hashmap");
 	setup();
-		test_for_putting_data();
-	tearDown();
-	testEnded();
-	testStarted("test_for_insert_data_into_bucket");
-	setup();
-		test_for_insert_data_into_bucket();
-	tearDown();
-	testEnded();
-	testStarted("test_for_putting_data_into_bucket");
-	setup();
-		test_for_putting_data_into_bucket();
-	tearDown();
-	testEnded();
-	testStarted("test_remove_an_element_from_hashmap");
-	setup();
-		test_remove_an_element_from_hashmap();
-	tearDown();
-	testEnded();
-	testStarted("test_should_give_iterator_of_keys");
-	setup();
-		test_should_give_iterator_of_keys();
-	tearDown();
-	testEnded();
-	testStarted("test_should_give_iterator_of_keys2");
-	setup();
-		test_should_give_iterator_of_keys2();
+		test_rehash_keys_in_hashmap();
 	tearDown();
 	testEnded();
 

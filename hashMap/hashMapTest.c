@@ -78,5 +78,27 @@ void test_should_give_iterator_of_keys2(){
            while(it.hasNext(&it))
            ASSERT(key[i] == *(int*)it.next(&it));
         }
-        
+}
+
+void test_rehash_keys_in_hashmap(){
+        Iterator it;
+        int i = 0 ,key[] = {30 ,40,50,60};
+        char* values[] ={"AAA","BBB","CCC","DDD"};
+        int afterRehashing[] ={40,60,30,50};
+        HashMap* map = createHashMap(hashc, compareKeys);
+        for(i = 0 ; i < 4 ;i++ )
+                ASSERT(put(map, &key[i] , &values[i]));
+        it = keys(map);
+        i = 0;
+        while(it.hasNext(&it)){
+                ASSERT(& key[i] == it.next(&it));
+                i++;
+        }
+        rehash(map);
+        it = keys(map);
+        i = 0;
+        while(it.hasNext(&it)){
+                ASSERT(& afterRehashing[i] == it.next(&it));
+                i++;
+        }
 }
