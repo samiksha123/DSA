@@ -19,7 +19,7 @@ int put(HashMap* hm,void* key,void* value);
 void* get(HashMap* hm,void* key);
 int removeData(HashMap* hm,void* key);
 Iterator keys(HashMap* hm);
-void dispose(HashMap* hm);
+void disposeMap(HashMap* hm);
 
 void rehash(HashMap* hm);
 void reset(HashMap* hm);

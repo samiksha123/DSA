@@ -88,7 +88,6 @@ Iterator keys(HashMap* hm){
     it = getIterator(list);
     return it;
 }
-
 void increaseBucket(HashMap* hm,int capacity){
     int i;
     hm->buckets  =  realloc(hm->buckets , capacity*(sizeof(List)));
@@ -108,35 +107,29 @@ void reset(HashMap* hm){
         }
     }
 }
-void rehash(HashMap* hm){
-    int i;
-    List* list;
+void insertInNewBucket( HashMap* hm ,List* list){
     Iterator it;
-    List* dataList;
-    HashElement *data;
-    for(i = 0;i < capacity;i++){
-        list = (List*)hm->buckets[i];
+    HashElement* hashElement;
+    if(list->head != NULL){
         it = getIterator(list);
-        if(list->head != NULL){
-            printf(".....");
-            while(it.hasNext(&it)){
-                printf("*");
-                data = (HashElement*)it.next(&it);
-                insert(dataList, i, data);
-                removeData(hm, data->key);
-                break;
-            }
+        while(it.hasNext(&it)){
+            hashElement = (HashElement*)it.next(&it);
+            removeData(hm, hashElement->key);
+            put(hm, hashElement->key, hashElement->value);
         }
     }
-    capacity = capacity*2;
-    increaseBucket(hm, capacity);
-    it  = getIterator(dataList);
-    while(it.hasNext(&it)){
-        data = (HashElement*)it.next(&it);
-        put(hm, data->key, data->value);
-    }
 }
-void dispose(HashMap *hm){
+void rehash(HashMap *hm){
+    List* list;
+    int i , newCapacity = capacity * 2;
+    increaseBucket(hm ,newCapacity);
+    for(i = 0 ; i < newCapacity ; i++) {
+        list = (List*)hm->buckets[i];
+        insertInNewBucket(hm,list);
+    }
+    capacity =newCapacity;
+}
+void disposeMap(HashMap *hm){
     int i;
     List* list;
     Iterator it;
