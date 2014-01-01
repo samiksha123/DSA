@@ -16,6 +16,7 @@ List* create();
 Node* createNode(void* previous,void* next);
 int insert(List* list,int index,void * element);
 void* deleteNode(List* list, int index);
+void disposeList(List* list);
 
 Iterator getIterator(List *list);
 void* next(Iterator *it);

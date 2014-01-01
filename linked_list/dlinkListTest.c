@@ -2,6 +2,14 @@
 #include "dlinkList.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+List* list;
+void setup(){
+    list = create();
+}
+void teardown(){
+    disposeList(list);
+}
 void test_create_node(){
     Node expected = {NULL,(void*)5,NULL};
     Node *actual = createNode(NULL,NULL);
@@ -9,14 +17,12 @@ void test_create_node(){
     ASSERT(expected.previous == actual->previous);
 }
 void test_insert_data_to_list(){
-    List* list = create();
     int num = 5;
     int num1 = 6;
     ASSERT(insert(list, 0, &num));
     ASSERT(insert(list, 1, &num1));
 }
 void test_insert_records_at_middle_of_list(){
-    List* list = create();
     int num = 5;
     int num1 = 6;
     int num2 = 5;
@@ -27,7 +33,6 @@ void test_insert_records_at_middle_of_list(){
     ASSERT(insert(list, 2, &num3));
 }
 void test_delete_first_element_in_list(){
-     List* list = create();
     int result;
     int num = 5;
     ASSERT(insert(list, 0, &num));
@@ -35,7 +40,6 @@ void test_delete_first_element_in_list(){
     ASSERT(5 == result);
 }
 void test_delete_middle_element_in_list(){
-    List* list = create();
     int num = 5;
     int num1 = 6;
     int num2 = 5;
@@ -48,7 +52,6 @@ void test_delete_middle_element_in_list(){
     ASSERT(5 == result);
 }
 void test_delete_end_element_in_list(){
-    List* list = create();
     int num = 5;
     int num1 = 6;
     int result,result1;
@@ -61,7 +64,6 @@ void test_delete_end_element_in_list(){
     ASSERT(5 == result1);
 }
 void test_hasnext_of_getiterator_gives_false_if_list_not_empty(){
-        List* list = create();
         Iterator it = getIterator(list);
         ASSERT(0 == it.hasNext(&it));
 }

@@ -79,7 +79,6 @@ void test_should_give_iterator_of_keys2(){
            ASSERT(key[i] == *(int*)it.next(&it));
         }
 }
-
 void test_rehash_keys_in_hashmap(){
         Iterator it;
         int i = 0 ,key[] = {30 ,40,50,60};

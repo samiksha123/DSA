@@ -16,7 +16,6 @@ HashMap* createHashMap(HashCodeGenerator hashCode,Compare compare){
 }
 int hashc(void* key,int capacity){
     int hash;
-    // printf("hello\n");
     hash = *(int*)key % capacity;
     return hash;
 }
@@ -24,8 +23,7 @@ int put(HashMap* hm,void* key,void* value){
     HashElement* data = getHashElement(key, value);
     int hash = hashc(key,capacity);
     List* list = (List*)hm->buckets[hash];
-    printf("%d\n",*(int*)key);
-    // reset(hm);
+    reset(hm);
     insert(list, list->length, data);
     return 1;
 }
@@ -67,7 +65,6 @@ int removeData(HashMap *hm, void *key){
     int index,hash;
     List* list;
     if(key == NULL || value == NULL) return 0;
-    // printf("----------%d\n",*(int*)key);
     hash = hashc(key,10);
     list = (List*)hm->buckets[hash];
     index = findIndex( hm ,key ,list);
@@ -97,6 +94,7 @@ void increaseBucket(HashMap* hm,int capacity){
     hm->buckets  =  realloc(hm->buckets , capacity*(sizeof(List)));
     for ( i = hm->capacity; i < capacity; i++)
         hm->buckets[i] = create();
+    hm->capacity = capacity;
 }
 void reset(HashMap* hm){
     List* list = create();
@@ -111,28 +109,30 @@ void reset(HashMap* hm){
     }
 }
 void rehash(HashMap* hm){
-    int i,hash ,index;
+    int i;
     List* list;
     Iterator it;
     List* dataList;
     HashElement *data;
     for(i = 0;i < capacity;i++){
         list = (List*)hm->buckets[i];
+        it = getIterator(list);
         if(list->head != NULL){
-            it = getIterator(list);
+            printf(".....");
             while(it.hasNext(&it)){
+                printf("*");
                 data = (HashElement*)it.next(&it);
-                insert(dataList, index, data);
+                insert(dataList, i, data);
                 removeData(hm, data->key);
+                break;
             }
         }
-        
     }
     capacity = capacity*2;
     increaseBucket(hm, capacity);
     it  = getIterator(dataList);
     while(it.hasNext(&it)){
-        data = it.next(&it);
+        data = (HashElement*)it.next(&it);
         put(hm, data->key, data->value);
     }
 }

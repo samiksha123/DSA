@@ -89,3 +89,8 @@ Iterator getIterator(List *list){
     it.next = &next;
     return it;
 }
+void disposeList(List* list){
+        while(list->length>0)
+                deleteNode(list,0);
+        free(list);
+};
