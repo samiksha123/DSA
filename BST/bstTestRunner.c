@@ -49,14 +49,24 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_for_inserting_root_into_bst_and_confirming_the_data_through_getRootData");
+	testStarted("test_for_inserting_root_into_bst_and_confirming_through_getRootData");
 	setup();
-		test_for_inserting_root_into_bst_and_confirming_the_data_through_getRootData();
+		test_for_inserting_root_into_bst_and_confirming_through_getRootData();
 	tearDown();
 	testEnded();
 	testStarted("test_for_inserting_data_into_bst");
 	setup();
 		test_for_inserting_data_into_bst();
+	tearDown();
+	testEnded();
+	testStarted("test_inserting_data_to_bst_and_confirming_through_get_children_data");
+	setup();
+		test_inserting_data_to_bst_and_confirming_through_get_children_data();
+	tearDown();
+	testEnded();
+	testStarted("test_inserting_data_to_bst_at_different_levels");
+	setup();
+		test_inserting_data_to_bst_at_different_levels();
 	tearDown();
 	testEnded();
 

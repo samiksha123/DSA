@@ -51,3 +51,29 @@ int insertInTree(BST* tree, void* dataToInsert){
     return 1;
 }
 
+BSTNode* getNode(BSTNode* node,void* parentData,CompareInTree *cmp){
+    int cmpResult=cmp(node->data,parentData);
+    if(cmpResult == 0) return node;
+    if(cmpResult > 0){
+        if(!node->leftChild) return node; 
+            return getNode(node->leftChild, parentData, cmp);
+    }
+    if(!node->rightChild) return node; 
+    return getNode(node->rightChild, parentData, cmp);
+
+}
+
+
+Children getChildrenData(BST *tree, void* data){
+    BSTNode* pNode=getNode(tree->root, data, tree->cmp);
+    Children children={NULL,NULL};
+    if(pNode->leftChild) children.left=pNode->leftChild->data;
+    if(pNode->rightChild) children.right=pNode->rightChild->data;
+    return children;
+}
+
+int searchInTree(BST tree, void* nodeData){
+    if(tree.cmp(((BSTNode*)tree.root)->data,nodeData)==0) return 1;
+    if(!getParent(tree.root, nodeData,tree.cmp)) return 1;
+    return 0;
+}
