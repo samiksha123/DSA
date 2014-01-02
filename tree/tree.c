@@ -64,7 +64,7 @@ int insertNode(Tree* tree,void* data,void* parentData){
     else{
         child = parentNode->children;
         while(child->sibbling != NULL)
-                child = child->sibbling;
+            child = child->sibbling;
         tn->parent = child->parent;
         child->sibbling = tn;
     }

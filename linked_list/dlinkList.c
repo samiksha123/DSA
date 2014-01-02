@@ -64,8 +64,7 @@ void* deleteNode(List* list,int index){
 };
 
 int hasNext(Iterator* it){
-    List *list;
-    list = (List*)it->list;
+    List *list =it->list;
     if(it->position == list->length) return 0;
     return 1;
 }

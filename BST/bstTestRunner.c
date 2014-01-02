@@ -49,34 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_for_putting_data");
+	testStarted("test_for_inserting_root_into_bst_and_confirming_the_data_through_getRootData");
 	setup();
-		test_for_putting_data();
+		test_for_inserting_root_into_bst_and_confirming_the_data_through_getRootData();
 	tearDown();
 	testEnded();
-	testStarted("test_for_insert_data_into_bucket");
+	testStarted("test_for_inserting_data_into_bst");
 	setup();
-		test_for_insert_data_into_bucket();
-	tearDown();
-	testEnded();
-	testStarted("test_for_putting_data_into_bucket");
-	setup();
-		test_for_putting_data_into_bucket();
-	tearDown();
-	testEnded();
-	testStarted("test_should_give_iterator_of_keys");
-	setup();
-		test_should_give_iterator_of_keys();
-	tearDown();
-	testEnded();
-	testStarted("test_should_give_iterator_of_keys2");
-	setup();
-		test_should_give_iterator_of_keys2();
-	tearDown();
-	testEnded();
-	testStarted("test_rehash_keys_in_hashmap");
-	setup();
-		test_rehash_keys_in_hashmap();
+		test_for_inserting_data_into_bst();
 	tearDown();
 	testEnded();
 
@@ -84,6 +64,8 @@ int main(){
 	fixtureTearDown();
 	return 0;
 }
+
+void setup(){}
 
 void tearDown(){}
 
