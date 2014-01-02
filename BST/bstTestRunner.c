@@ -69,6 +69,11 @@ int main(){
 		test_inserting_data_to_bst_at_different_levels();
 	tearDown();
 	testEnded();
+	testStarted("test_for_deleting_data_from_bst");
+	setup();
+		test_for_deleting_data_from_bst();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

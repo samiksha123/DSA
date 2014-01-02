@@ -53,3 +53,18 @@ void test_inserting_data_to_bst_at_different_levels(){
         ASSERT(*(int*)children.right==3);
         ASSERT(children.left==NULL);
 }
+
+void test_for_deleting_data_from_bst(){
+        BST tree=createTree(cmp);
+        int a = 5, b = 2,c = 6, d = 3;
+        Children children;
+        ASSERT(insertInTree(&tree, &a));
+        ASSERT(insertInTree(&tree, &b));
+        ASSERT(insertInTree(&tree, &c));
+        ASSERT(insertInTree(&tree, &d));
+        ASSERT(deleteFromTree(&tree, &b));
+        ASSERT(0==searchInTree(tree,&b));
+        children=getChildrenData(&tree, &a);
+        ASSERT(*(int*)children.left==3);
+        ASSERT(*(int*)children.right==6);
+}

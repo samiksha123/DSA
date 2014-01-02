@@ -63,7 +63,6 @@ BSTNode* getNode(BSTNode* node,void* parentData,CompareInTree *cmp){
 
 }
 
-
 Children getChildrenData(BST *tree, void* data){
     BSTNode* pNode=getNode(tree->root, data, tree->cmp);
     Children children={NULL,NULL};
@@ -76,4 +75,21 @@ int searchInTree(BST tree, void* nodeData){
     if(tree.cmp(((BSTNode*)tree.root)->data,nodeData)==0) return 1;
     if(!getParent(tree.root, nodeData,tree.cmp)) return 1;
     return 0;
+}
+void shift(BSTNode* node,CompareInTree* cmp){
+        while(node->leftChild){
+            node->data=node->leftChild->data;
+            shift(node->leftChild, cmp);
+            if(!node->leftChild->leftChild) return;
+        }
+        while(node->rightChild){
+            node->data=node->rightChild->data;
+            shift(node->rightChild, cmp);
+            if(!node->rightChild->rightChild) return;
+        }
+}
+int deleteFromTree(BST* tree, void* data){
+        BSTNode* node = getNode(tree->root, data, tree->cmp);
+        shift(node,tree->cmp);
+        return 1;
 }
